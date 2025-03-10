@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive Loan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/finance-pages.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="./dashboard.html">
+                <i class="fas fa-mobile-alt fa-2x"></i>
+            </a>
+            <h3 id="userNameDisplay" class="user-name"></h3>
+        </div>
+        <div class="nav-links">
+            <a href="./dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+
+            <!-- Simplified POS Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-cash-register"></i> POS(Point Of Sales) <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./sales.html"><i class="fas fa-shopping-cart"></i> Sales</a>
+                    <a href="./inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                    <a href="./products.html"><i class="fas fa-mobile-alt"></i> Product List</a>
+                    <a href="./supplier-list.html"><i class="fas fa-truck"></i> Supplier List</a>
+                    <a href="./category-list.html"><i class="fas fa-tags"></i> Category List</a>
+                </div>
+            </div>
+
+            <a href="./commission.html"><i class="fas fa-hand-holding-usd"></i> Banking Commissions</a>
+            <a href="./daily-closing.html"><i class="fas fa-cash-register"></i> Daily Closings</a>
+            <!-- Simplified Loan Management Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-money-bill-wave"></i> Loan Management <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./customer-list.html"><i class="fas fa-users"></i> Customer List</a>
+                    <a href="./give-loan.html"><i class="fas fa-hand-holding-usd"></i> Give Loan</a>
+                    <a href="./receive-loan.html"><i class="fas fa-money-bill-alt"></i> Receive Loan</a>
+                </div>
+            </div>
+
+            <a href="./reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <div class="page-header text-center">
+            <h1><i class="fas fa-hand-holding-usd"></i> Receive Loan</h1>
+        </div>
+
+        <div class="finance-container">
+            <form id="receiveLoanForm" class="finance-form">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" class="finance-input" required>
+            
+                <label for="transaction_id">Transaction ID:</label>
+                <div style="display: flex;">
+                    <input type="text" id="transaction_id" name="transaction_id" class="finance-input" required>
+                    <button type="button" id="searchButton" class="finance-button">Search</button>
+                </div>
+            
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" class="finance-input" required>
+            
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" class="finance-input" step="0.01" required>
+            
+                <label for="loan_type">Loan Type:</label>
+                <select id="loan_type" name="loan_type" class="finance-select">
+                    <option value="full_amount">Full Amount</option>
+                    <option value="monthly_installment">Monthly Installments</option>
+                </select>
+            
+                <div id="installmentFields" style="display: none;">
+                    <label for="installment_amount">Monthly Installment Amount:</label>
+                    <input type="number" id="installment_amount" name="installment_amount" class="finance-input" step="0.01">
+            
+                    <label for="total_installment">Total Monthly Installments:</label>
+                    <input type="number" id="total_installment" name="total_installment" class="finance-input" step="0.01" readonly>
+            
+                    <label for="installment_number">Installment Number:</label>
+                    <input type="number" id="installment_number" name="installment_number" class="finance-input" value="1" required pattern="[1-9]\d*">
+            
+                    <label for="remaining_amount">Remaining Amount:</label>
+                    <input type="number" id="remaining_amount" name="remaining_amount" class="finance-input" step="0.01" readonly>
+                </div>
+            
+                <input type="submit" value="Submit" class="finance-button">
+            </form>
+
+            <div id="successMessage" class="alert-message"></div>
+
+            <div class="search-section">
+                <input type="text" id="searchInputTable" class="finance-input" placeholder="Search...">
+                <button id="searchButtonTable" class="finance-button">Search</button>
+            </div>
+
+            <div class="finance-table-container">
+                <table id="loanTable" class="finance-table modern-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Loan Type</th>
+                            <th>Installment Number</th>
+                            <th>remaining Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loanTableBody">
+                        <!-- Data will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/receiveloanScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #1a1a2e, #1a1a2e);
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #profileContent {
+            background-color: #30475e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 600px;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        h1 {
+            color: #ef8354;
+            margin-bottom: 20px;
+            font-size: xx-large;
+        }
+
+        nav {
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f9f9f9;
+            font-size: larger;
+            
+        }
+
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            background-color: #222b3e;
+            color: orange;
+            font-size: larger;
+            
+        }
+
+        #profilePictureContainer,
+        #updatePictureContainer {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #profilePictureContainer img,
+        #updatePictureContainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #pictureInput {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #ef8354;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #d8572a;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    
+    <div id="profileContent" class="content">
+        <form id="profile">
+        <h2>Profile</h2>
+      
+        <label for="profileName">Name:</label>
+        <input type="text" id="profileName" name="profileName" readonly>
+        <label for="profileUsername">Username:</label>
+        <input type="text" id="profileUsername" name="profileUsername" readonly>
+        <label for="profileEmail">Email:</label>
+        <input type="text" id="profileEmail" name="profileEmail" readonly>
+        <label for="profilePhone">Phone No.:</label>
+        <input type="text" id="profilePhone" name="profilePhone" readonly>
+       
+    </form>
+    <button id ="back-button">Back</button>
+    </div>
+
+    
+
+    <script src="./scripts/settingScript.js">
+      
+    </script>
+</body>
+
+</html>

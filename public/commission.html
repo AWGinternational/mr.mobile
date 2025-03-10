@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/finance-pages.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="./Dashboard.html">
+                <i class="fas fa-mobile-alt fa-2x"></i>
+            </a>
+            <h3 id="userNameDisplay" class="user-name"></h3>
+        </div>
+        <div class="nav-links">
+            <a href="./Dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+
+            <div class="dropdown">
+                <a href="#" class="dropdown-btn" id="pos-dropdown-btn">
+                    <i class="fas fa-cash-register"></i> POS(Point Of Sales) <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content" id="pos-dropdown-content">
+                    <a href="./sales.html"><i class="fas fa-shopping-cart"></i> Sales</a>
+                    <a href="./inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                    <a href="./products.html"><i class="fas fa-mobile-alt"></i> Product List</a>
+                    <a href="./supplier-list.html"><i class="fas fa-truck"></i> Supplier List</a>
+                    <a href="./category-list.html"><i class="fas fa-tags"></i> Category List</a>
+                </div>
+            </div>
+
+            <!-- New Loan Management Dropdown -->
+            <div class="dropdown">
+                <a href="#" class="dropdown-btn" id="loan-dropdown-btn">
+                    <i class="fas fa-money-bill-wave"></i> Loan Management <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content" id="loan-dropdown-content">
+                    <a href="./customer-list.html"><i class="fas fa-users"></i> Customer List</a>
+                    <a href="./give-loan.html"><i class="fas fa-hand-holding-usd"></i> Give Loan</a>
+                    <a href="./receive-loan.html"><i class="fas fa-money-bill-alt"></i> Receive Loan</a>
+                </div>
+            </div>
+
+            <a href="./commission.html"><i class="fas fa-hand-holding-usd"></i> Banking Commissions</a>
+            <a href="./daily-closing.html"><i class="fas fa-cash-register"></i> Daily Closings</a>
+            <a href="./reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <div class="page-header">
+            <h1><i class="fas fa-hand-holding-usd"></i> Commission Management</h1>
+        </div>
+
+        <div class="finance-container">
+            <form id="commissionForm" class="finance-form">
+                <!-- Add hidden input for commission ID -->
+                <input type="hidden" id="commissionId" value="">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" class="finance-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone (Optional):</label>
+                    <input type="text" id="phone" class="finance-input" maxlength="11">
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" class="finance-input" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Service:</label>
+                    <select id="service" class="finance-select" required>
+                        <option value="">Select Service</option>
+                        <option value="Jazz Cash">Jazz Cash</option>
+                        <option value="Easy Load">Easy Load</option>
+                        <option value="Easy Paisa">Easy Paisa</option>                        <option value="Bank">Bank</option>
+                        <option value="Receiving">Receiving</option>
+                    </select>
+                </div>
+
+                <!-- New company field - initially hidden -->
+                <div class="form-group" id="companyField" style="display: none;">
+                    <label for="company">Company:</label>
+                    <select id="company" class="finance-select">
+                        <option value="">Select Company</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Ufone">Ufone</option>
+                        <option value="Zong">Zong</option>
+                        <option value="Telenor">Telenor</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="discount">Discount Amount (Rs):</label>
+                    <input type="number" id="discount" class="finance-input" value="0" min="0">
+                </div>
+
+                <button type="submit" id="submit" class="finance-button">Save Commission</button>
+            </form>
+
+            <!-- Add this before the filter-buttons div -->
+            <div class="date-filter">
+                <div class="form-group">
+                    <label for="filterFromDate">From Date:</label>
+                    <input type="date" id="filterFromDate" class="finance-input">
+                </div>
+                <div class="form-group">
+                    <label for="filterToDate">To Date:</label>
+                    <input type="date" id="filterToDate" class="finance-input">
+                </div>
+            </div>
+
+            <!-- Date filter will be inserted here by JavaScript -->
+            <div class="filter-buttons">
+                <button class="filter-btn" data-service="all">All Services</button>
+                <button class="filter-btn" data-service="Jazz Cash">Jazz Cash</button>
+                <button class="filter-btn" data-service="Easy Paisa">Easy Paisa</button>
+                <button class="filter-btn" data-service="Easy Load">Easy Load</button>
+                <button class="filter-btn" data-service="Bank">Bank</button>
+                <button class="filter-btn" data-service="Receiving">Receiving</button>
+            </div>
+
+            <div class="finance-table-container">
+                <table id="commissionTable" class="finance-table modern-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Phone</th>
+                            <th>Amount</th>
+                            <th>Service</th>
+                            <th>Commission</th>
+                            <th>Discount</th>
+                            <th>Net Profit</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be inserted here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="total-section">
+                <button id="totalProfitButton" class="finance-button"></button>
+                <div id="totalProfit"></div>
+            </div>
+        </div>
+
+        <!-- Add toast notification container -->
+        <div id="toastNotification" class="toast-notification"></div>
+    </div>
+
+    <script src="./scripts/commissionScript.js"></script>
+</body>
+</html>

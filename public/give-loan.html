@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give Loan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/finance-pages.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="./dashboard.html">
+                <i class="fas fa-mobile-alt fa-2x"></i>
+            </a>
+            <h3 id="userNameDisplay" class="user-name"></h3>
+        </div>
+        <div class="nav-links">
+            <a href="./dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+
+            <!-- Simplified POS Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-cash-register"></i> POS(Point Of Sales) <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./sales.html"><i class="fas fa-shopping-cart"></i> Sales</a>
+                    <a href="./inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                    <a href="./products.html"><i class="fas fa-mobile-alt"></i> Product List</a>
+                    <a href="./supplier-list.html"><i class="fas fa-truck"></i> Supplier List</a>
+                    <a href="./category-list.html"><i class="fas fa-tags"></i> Category List</a>
+                </div>
+            </div>
+
+            <a href="./commission.html"><i class="fas fa-hand-holding-usd"></i> Banking Commissions</a>
+            <a href="./daily-closing.html"><i class="fas fa-cash-register"></i> Daily Closings</a>
+            <!-- Simplified Loan Management Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-money-bill-wave"></i> Loan Management <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./customer-list.html"><i class="fas fa-users"></i> Customer List</a>
+                    <a href="./give-loan.html"><i class="fas fa-hand-holding-usd"></i> Give Loan</a>
+                    <a href="./receive-loan.html"><i class="fas fa-money-bill-alt"></i> Receive Loan</a>
+                </div>
+            </div>
+
+            <a href="./reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header text-center">
+            <h1><i class="fas fa-hand-holding-usd"></i> Give Loan</h1>
+        </div>
+
+        <div class="finance-container">
+            <form id="loanForm" class="finance-form">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" class="finance-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Customer Name:</label>
+                    <select id="name" name="name" class="finance-select" required></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" class="finance-input" required min="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="installment">Installment Months:</label>
+                    <select id="installment" name="installment" class="finance-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyInstallmentAmount">Monthly Installment Amount:</label>
+                    <input type="text" id="monthlyInstallmentAmount" name="monthly_installment" class="finance-input" readonly>
+                </div>
+
+                <button type="submit" class="finance-button">Submit Loan</button>
+            </form>
+
+            <div id="successMessage" class="alert-message"></div>
+
+            <div class="action-buttons">
+                <button id="totalLoan" class="finance-button">Calculate Total Loan</button>
+                <div id="totalLoanDisplay" class="total-display"></div>
+            </div>
+
+            <div class="search-section">
+                <input type="text" id="searchInput" class="finance-input" placeholder="Search...">
+                <button id="searchButton" class="finance-button">Search</button>
+            </div>
+
+            <div class="loan-summary-section">
+                <div class="customer-info" id="customerInfo">
+                    <h3>Customer Loan History</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-label">Total Loans</span>
+                            <span class="stat-value">₨<span id="totalAmountBorrowed">0</span></span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Credit Score</span>
+                            <div class="credit-score">
+                                <span class="stat-value" id="creditScore">0</span>
+                                <div class="score-indicator"></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">Payment Rate</span>
+                            <span class="stat-value"><span id="paymentRate">0</span>%</span>
+                        </div>
+                    </div>
+                    <div class="loan-details">
+                        <p>Active Loans: <span id="activeLoanCount">0</span></p>
+                        <p>Completed Loans: <span id="completedLoans">0</span></p>
+                        <p>Amount Remaining: ₨<span id="remainingAmount">0</span></p>
+                    </div>
+                </div>
+                
+                <div class="payment-history" id="paymentHistory">
+                    <h3>Recent Payments</h3>
+                    <div class="payment-list">
+                        <!-- Payments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="finance-table-container">
+                <table id="loanTable" class="finance-table modern-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Installment Months</th>
+                            <th>Monthly Installment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loanTableBody">
+                        <!-- Data will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/giveloanScript.js"></script>
+</body>
+</html>

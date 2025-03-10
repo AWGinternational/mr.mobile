@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4facfe;
+            --error-color: #ff4757;
+            --success-color: #2ecc71;
+            --bg-gradient: linear-gradient(45deg, #1a1a1a, #2c3e50);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            padding: 20px;
+        }
+
+        .login-container, .signup-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 480px;
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover, .signup-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        label {
+            color: white;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 45px 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .input-group i:hover {
+            color: white;
+        }
+
+        button {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        p {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #00f2fe;
+        }
+
+        /* Loading animation */
+        .loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border: 3px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: loading 0.6s linear infinite;
+        }
+
+        @keyframes loading {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success animation */
+        .success {
+            background: var(--success-color) !important;
+        }
+
+        /* Validation styles */
+        input:invalid {
+            border-color: var(--error-color);
+        }
+
+        input:valid {
+            border-color: var(--success-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup-container">
+        <h2>Create Account</h2>
+        <form id="signupForm" novalidate>
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    required
+                    pattern="[A-Za-z\s]+"
+                >
+                <i class="fas fa-user"></i>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                >
+                <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    required
+                    pattern="\d{11}"
+                >
+                <i class="fas fa-phone"></i>
+            </div>
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    required
+                    pattern="[A-Za-z0-9_]+"
+                >
+                <i class="fas fa-at"></i>
+            </div>
+
+            <div class="input-group">
+                <label for="signupPassword">Password</label>
+                <input 
+                    type="password" 
+                    id="signupPassword" 
+                    name="password" 
+                    required
+                    minlength="8"
+                    autocomplete="new-password"
+                >
+                <i class="fas fa-eye toggle-password"></i>
+            </div>
+
+            <div class="error-message" id="error-message"></div>
+
+            <button type="submit" id="signup">
+                <span>Create Account</span>
+            </button>
+        </form>
+
+        <p>
+            Already have an account? <a href="login.html">Login</a>
+        </p>
+    </div>
+
+
+    <script src="./scripts/signupScript.js">
+        
+        </script>
+    </body>
+    
+    </html>

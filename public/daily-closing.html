@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Closing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/finance-pages.css">
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="./dashboard.html">
+                <i class="fas fa-mobile-alt fa-2x"></i>
+            </a>
+            <h3 id="userNameDisplay" class="user-name"></h3>
+        </div>
+        <div class="nav-links">
+            <a href="./dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+
+            <!-- Simplified POS Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-cash-register"></i> POS(Point Of Sales) <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./sales.html"><i class="fas fa-shopping-cart"></i> Sales</a>
+                    <a href="./inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                    <a href="./products.html"><i class="fas fa-mobile-alt"></i> Product List</a>
+                    <a href="./supplier-list.html"><i class="fas fa-truck"></i> Supplier List</a>
+                    <a href="./category-list.html"><i class="fas fa-tags"></i> Category List</a>
+                </div>
+            </div>
+
+            <a href="./commission.html"><i class="fas fa-hand-holding-usd"></i> Banking Commissions</a>
+            <a href="./daily-closing.html"><i class="fas fa-cash-register"></i> Daily Closings</a>
+            <!-- Simplified Loan Management Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-money-bill-wave"></i> Loan Management <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./customer-list.html"><i class="fas fa-users"></i> Customer List</a>
+                    <a href="./give-loan.html"><i class="fas fa-hand-holding-usd"></i> Give Loan</a>
+                    <a href="./receive-loan.html"><i class="fas fa-money-bill-alt"></i> Receive Loan</a>
+                </div>
+            </div>
+
+            <a href="./reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header text-center">
+            <h1><i class="fas fa-cash-register"></i> Daily Closing</h1>
+        </div>
+
+        <div class="finance-container compact-container">
+            <form id="closingForm" class="finance-form compact-form" onsubmit="return false;">
+                <!-- Form fields with finance-input class -->
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="telenorLoad">Telenor Load:</label>
+                    <input type="number" id="telenorLoad" name="telenorLoad" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="zongLoad">Zong Load:</label>
+                    <input type="number" id="zongLoad" name="zongLoad" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="jazzLoad">Jazz Load:</label>
+                    <input type="number" id="jazzLoad" name="jazzLoad" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="ufoneLoad">Ufone Load:</label>
+                    <input type="number" id="ufoneLoad" name="ufoneLoad" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="easypaisa">Easypaisa:</label>
+                    <input type="number" id="easypaisa" name="easypaisa" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="jazzCash">JazzCash:</label>
+                    <input type="number" id="jazzCash" name="jazzCash" class="finance-input" required>
+                </div>
+                <div class="form-group" id="totalLoanContainer">
+                    <label for="loan">Loan:</label>
+                    <input type="number" id="loan" name="loan" class="finance-input" value="0" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="cash">Cash:</label>
+                    <input type="number" id="cash" name="cash" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="bank">Bank:</label>
+                    <input type="number" id="bank" name="bank" class="finance-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="credit">Credit:</label>
+                    <input type="number" id="credit" name="credit" class="finance-input" required>
+                </div>
+
+                <button type="submit" id="submit" class="finance-button">Submit</button>
+            </form>
+
+            <div class="finance-table-container">
+                <table id="closingTable" class="finance-table modern-table compact-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Telenor</th>
+                            <th>Zong</th>
+                            <th>Jazz</th>
+                            <th>Ufone</th>
+                            <th>Easypaisa</th>
+                            <th>JazzCash</th>
+                            <th>Loan</th>
+                            <th>Cash</th>
+                            <th>Bank</th>
+                            <th>Credit</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="closingTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       
+        <div id="toastNotification" class="toast-notification"></div>
+    </div>
+
+    <script src="./scripts/closingScript.js"></script>
+</body>
+
+</html>

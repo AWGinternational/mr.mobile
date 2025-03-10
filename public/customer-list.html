@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/finance-pages.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <a href="./dashboard.html">
+                <i class="fas fa-mobile-alt fa-2x"></i>
+            </a>
+            <h3 id="userNameDisplay" class="user-name"></h3>
+        </div>
+        <div class="nav-links">
+            <a href="./dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+
+            <!-- Simplified POS Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-cash-register"></i> POS(Point Of Sales) <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./sales.html"><i class="fas fa-shopping-cart"></i> Sales</a>
+                    <a href="./inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                    <a href="./products.html"><i class="fas fa-mobile-alt"></i> Product List</a>
+                    <a href="./supplier-list.html"><i class="fas fa-truck"></i> Supplier List</a>
+                    <a href="./category-list.html"><i class="fas fa-tags"></i> Category List</a>
+                </div>
+            </div>
+
+            <a href="./commission.html"><i class="fas fa-hand-holding-usd"></i> Banking Commissions</a>
+            <a href="./daily-closing.html"><i class="fas fa-cash-register"></i> Daily Closings</a>
+            <!-- Simplified Loan Management Dropdown -->
+            <div class="dropdown">
+                <a class="dropdown-btn">
+                    <i class="fas fa-money-bill-wave"></i> Loan Management <i class="fas fa-caret-down"></i>
+                </a>
+                <div class="dropdown-content">
+                    <a href="./customer-list.html"><i class="fas fa-users"></i> Customer List</a>
+                    <a href="./give-loan.html"><i class="fas fa-hand-holding-usd"></i> Give Loan</a>
+                    <a href="./receive-loan.html"><i class="fas fa-money-bill-alt"></i> Receive Loan</a>
+                </div>
+            </div>
+
+            <a href="./reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-header text-center">
+            <h1><i class="fas fa-users"></i> Customer List</h1>
+        </div>
+
+        <div class="finance-container">
+            <form id="customerForm" class="finance-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="finance-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" class="finance-input">
+                </div>
+
+                <div class="form-group">
+                    <label for="cnic">CNIC:</label>
+                    <input type="text" id="cnic" name="cnic" class="finance-input" pattern="[0-9]{13}" title="Please enter a valid 13-digit CNIC" placeholder="e.g 3730312345678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="phone" name="phone" class="finance-input" pattern="[0-9]{11}" title="Please enter a valid 11-digit phone number" placeholder="e.g 03331234567" required>
+                </div>
+
+                <button type="submit" class="finance-button">Submit</button>
+            </form>
+
+            <div class="search-section">
+                <input type="text" id="searchInput" class="finance-input" placeholder="Search...">
+                <button id="searchButton" class="finance-button">Search</button>
+            </div>
+
+            <div class="finance-table-container">
+                <table id="customerTable" class="finance-table modern-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>CNIC</th>
+                            <th>Phone Number</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerTableBody">
+                        <!-- Data will be populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/customerScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <style>
+   /* Updated Color Scheme */
+:root {
+  --primary-color: #5E60CE;
+  --secondary-color: #9896F1;
+  --background-color: #F5F5F5;
+  --text-color: #333333;
+  --module-hover-color: #C3BEFF;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.navbar .logo i {
+  font-size: 40px;
+  margin-right: 10px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+}
+
+.user-section i {
+  font-size: 40px;
+  margin-right: 10px;
+}
+
+.user-section .user-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.small-navbar {
+  background-color: var(--secondary-color);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  padding: 20px;
+  display: none;
+  border-radius: 10px;
+}
+
+.small-navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.small-navbar ul li {
+  margin-bottom: 10px;
+}
+
+.small-navbar ul li a {
+  color: var(--background-color);
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-section:hover .small-navbar {
+  display: block;
+}
+.content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+  }
+  
+  .module {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+  }
+  
+  .module:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background: var(--primary-color);
+  }
+  
+  .module i {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+  }
+  
+  .module:hover i,
+  .module:hover span {
+      color: white;
+  }
+  a.module {
+    text-decoration: none;
+    color: inherit;
+}
+  .module a, 
+.module span {
+    text-decoration: none;
+    color: white;
+}
+  /* Icon specific colors */
+  .module.products i { color: #c7f74f; }
+  .module.loan i { color: #fd2c6b; }
+  .module.commission i { color: #61f953; }
+  .module.closing i { color: #f35edc; }
+  .module.reports i { color: #FF9800; }
+  
+  .module span {
+      display: block;
+      font-size: 1.1em;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+      font-size: larger;
+      font-weight: bold;
+  }
+
+.content {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 30px;
+}
+/* .content span{
+  text-decoration: none;
+  color:white;
+
+} */
+
+.module {
+  background-image: linear-gradient(to bottom right, var(--primary-color), var(--secondary-color));
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.module:hover {
+  transform: translateY(-10px);
+  background-image: linear-gradient(to bottom right, var(--primary-color), var(--module-hover-color));
+}
+
+.module i {
+  font-size: 64px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.module h2 a {
+  text-decoration: none;
+  color: var(--background-color);
+  font-size: 18px;
+}
+
+.footer {
+  background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  color: var(--background-color);
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+  margin: 10px 0;
+}
+
+.footer .contact-details {
+  display: flex;
+  justify-content: center;
+}
+
+.footer .contact-details div {
+  margin: 0 20px;
+}
+  </style>
+</head>
+<body>
+  <div class="navbar">
+      <div class="logo">
+          <i class="fas fa-mobile-alt fa-2x"></i>
+          <span>AWG International</span>
+      </div>
+      <div class="user-section">
+          <i class="fas fa-user"></i>
+          <div class="user-name" id="username-display"></div>
+          <div class="small-navbar">
+              <ul>
+                  <li><a href="#" id="edit-picture"><i class="fas fa-image"></i>Edit Picture</a></li>
+                  <li><a href="./settings.html" id="settings"><i class="fas fa-cog"></i>Profile</a></li>
+                  <li><a href="./changepassword.html"><i class="fas fa-key"></i>Change Password</a></li>
+                  <li><a href="#" id="logout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+  
+  <div class="content">
+    <a href="./dashboard.html" class="module products">
+        <i class="fas fa-shopping-bag"></i>
+        <span>Point Of Sale(POS)</span>
+    </a>
+    
+    <a href="./customer-list.html" class="module loan">
+        <i class="fas fa-hand-holding-usd"></i>
+        <span>Loan</span>
+    </a>
+    
+    <a href="./commission.html" class="module commission">
+        <i class="fas fa-percentage"></i>
+        <span>Daily Commission</span>
+    </a>
+    
+    <a href="./daily-closing.html" class="module closing">
+        <i class="fas fa-calendar-check"></i>
+        <span>Daily Closing</span>
+    </a>
+
+    <a href="./reports.html" class="module reports">
+        <i class="fas fa-chart-line"></i>
+        <span>Reports</span>
+    </a>
+</div>
+  
+  <div class="footer">
+    <p>&copy; AWG International. All rights reserved.</p>
+    <div class="contact-details">
+      <div>
+        <p>Islamabad, Pakistan</p>
+        <p>Phone: +92 3301234567</p>
+        <p>Email: info@AWG International.com</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js"></script>
+  <script src="./scripts/dashboardScript.js"></script>
+</body>
+</html>
+
+
+
+
