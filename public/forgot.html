@@ -3,105 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
-    <style>
-        body {
-            background: linear-gradient(to right, #1a1a2e, #1a1a2e);
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .forgot-password-container {
-            background-color: #30475e;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            width: 300px;
-            text-align: center;
-            animation: fadeIn 1s;
-        }
-
-        h2 {
-            color: #ef8354;
-        }
-
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #555555;
-            border-radius: 5px;
-            background-color: #222b3e;
-            color: #ffffff;
-        }
-
-        button {
-            background-color: #ef8354;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #d8572a;
-        }
-
-        p {
-            margin-top: 10px;
-        }
-
-        a {
-            color: #ef8354;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #d8572a;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
+    <title>Forgot Password | Mr. Mobile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/auth-common.css">
 </head>
 <body>
-    <div class="forgot-password-container">
-        <h2>Forgot Password</h2>
-        <form action="/api/users/reset-password" method="get">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Reset Password</h2>
+                <p>Enter your email to receive a password reset link</p>
+            </div>
+            
+            <div class="error-message" id="errorMessage"></div>
+            <div id="successMessage" style="display: none; background: rgba(6, 214, 160, 0.2); color: var(--success-color); padding: 12px; border-radius: 8px; margin-bottom: 24px; font-size: 14px; text-align: center;"></div>
+            
+            <form id="forgotPasswordForm" novalidate>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-icon-wrap">
+                        <i class="input-icon fas fa-envelope"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="auth-input" 
+                            required
+                            placeholder="Enter your registered email"
+                        >
+                    </div>
+                </div>
 
-            <label for="email">Email:</label>
-            <input type="text" id="email" placeholder="Enter your email">
-            
-            <br>
-            <button type="button" id="resetPassword">Reset Password</button>
-          
-            <div id="errorMessage" style="color: rgb(217, 255, 0);"></div>
-            
-        </form>
-        
-        <p>Remember your password? <a href="login.html">Login</a></p>
+                <button type="submit" id="resetButton" class="auth-button">
+                    <span class="button-text">Send Reset Link</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Remember your password? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
     </div>
 
-    <script src="./scripts/forgotPasswordScript.js"></script>
+    <script src="./scripts/forgotPassword.js"></script>
 </body>
 </html>

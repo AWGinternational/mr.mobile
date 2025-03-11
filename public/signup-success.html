@@ -3,61 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Success</title>
+    <title>Registration Successful | Mr. Mobile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --success-color: #06d6a0;
+            --background-gradient: linear-gradient(135deg, #0c1a44 0%, #132e5c 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-light: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            background: var(--background-gradient);
+            padding: 20px;
         }
 
         .success-container {
-            background-color: #262626;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            width: 300px;
+            width: 100%;
+            max-width: 420px;
             text-align: center;
-            animation: fadeIn 1s;
+        }
+
+        .success-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .success-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(225deg, rgba(6, 214, 160, 0.3), transparent);
+            z-index: -1;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .success-icon i {
+            color: white;
+            font-size: 40px;
+            animation: checkmark 0.5s ease-in-out forwards;
+            opacity: 0;
+            transform: scale(0);
         }
 
         h2 {
-            color: #f39c12;
+            color: var(--text-light);
+            font-size: 24px;
+            margin-bottom: 15px;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
         }
 
         p {
-            margin-top: 10px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
         }
 
-        a {
-            color: #f39c12;
+        .action-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 500;
+            display: inline-block;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease forwards;
+            animation-delay: 0.7s;
+            opacity: 0;
         }
 
-        a:hover {
-            color: #f39c12;
+        .action-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
 
-        @keyframes fadeIn {
+        @keyframes scaleIn {
             from {
+                transform: scale(0);
                 opacity: 0;
             }
             to {
+                transform: scale(1);
                 opacity: 1;
+            }
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
             }
         }
     </style>
 </head>
 <body>
     <div class="success-container">
-        <h2>User registered successfully</h2>
-        <p>Click <a href="./login.html">here</a> to login.</p>
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>Registration Successful!</h2>
+            <p>Your account has been created successfully. You can now log in with your credentials.</p>
+            <a href="login.html" class="action-button">Go to Login</a>
+        </div>
     </div>
+
+    <script>
+        // Add class to enable animation after a brief delay
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelector('.success-icon i').style.animationDelay = "0.2s";
+            }, 100);
+        });
+    </script>
 </body>
 </html>

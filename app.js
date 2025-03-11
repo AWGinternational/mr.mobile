@@ -50,14 +50,27 @@ app.use(limiter);
 // Session configuration
 app.use(session({
     secret: process.env.SESSION_SECRET || 'c9e1f0ae837b4a29268b4d0f1261f7f8e93b2ce6aae94827f8947e4a59c894a6',
-    resave: false,
-    saveUninitialized: false,
+    resave: true, // Changed to true to ensure session is saved
+    saveUninitialized: true, // Changed to true to ensure new sessions are saved
     cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        maxAge: 60 * 60 * 1000, // 1 hour
+        secure: false, // Set to false to work on localhost without HTTPS
+        maxAge: 24 * 60 * 60 * 1000, // Increased to 24 hours
     },
+    store: new (require('express-session').MemoryStore)(), // Explicit memory store for debugging
 }));
+
+// Add session debug middleware
+app.use((req, res, next) => {
+    const originalEnd = res.end;
+    res.end = function() {
+        if (req.session && req.path.includes('/login')) {
+            console.log('Session after login:', req.sessionID, !!req.session.user);
+        }
+        originalEnd.apply(this, arguments);
+    };
+    next();
+});
 
 // Response compression
 app.use(compression());

@@ -3,237 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Signup</title>
+    <title>Login | Mr. Mobile</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #cac8c6;
-            --error-color: #d28416;
-            --success-color: #2ecc71;
-            --bg-gradient: linear-gradient(45deg, #1a1a1a, #2c3e50);
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --error-color: #ef476f;
+            --success-color: #06d6a0;
+            --background-gradient: linear-gradient(135deg, #0c1a44 0%, #132e5c 100%);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: var(--bg-gradient);
+            justify-content: center;
+            background: var(--background-gradient);
             padding: 20px;
         }
 
-        .login-container, .signup-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        .auth-container {
             width: 100%;
-            max-width: 480px;
-            transition: transform 0.3s ease;
-        }
-
-        .login-container:hover, .signup-container:hover {
-            transform: translateY(-5px);
-        }
-
-        h2 {
-            color: white;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .input-group {
+            max-width: 420px;
             position: relative;
         }
 
-        label {
-            color: white;
-            margin-bottom: 8px;
-            display: block;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
+        .auth-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        input {
+        .auth-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 15px 45px 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            color: white;
+            height: 100%;
+            background: linear-gradient(225deg, rgba(67, 97, 238, 0.3), transparent);
+            z-index: -1;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-header h2 {
+            color: var(--text-light);
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .input-icon-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            color: var(--text-secondary);
             font-size: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 14px 14px 14px 45px;
+            color: var(--text-light);
+            font-size: 15px;
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        .auth-input:focus {
             outline: none;
             border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
         }
 
-        .input-group i {
+        .password-toggle {
             position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.7);
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .input-group i:hover {
-            color: white;
-        }
-
-        button {
-            background: linear-gradient(45deg, #e98a04, #d64806);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
+            right: 16px;
+            color: var(--text-secondary);
             cursor: pointer;
             font-size: 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: var (--text-secondary);
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .forgot-link:hover {
+            color: var(--text-light);
+        }
+
+        .auth-button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        button:hover {
+        .auth-button:hover {
+            background: var(--secondary-color);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
         }
 
-        button:active {
+        .auth-button:active {
             transform: translateY(0);
         }
 
-        .error-message {
-            color: var(--error-color);
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        p {
-            color: white;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #893d03;
-        }
-
-        .loading {
+        .auth-button .button-text {
             position: relative;
+            z-index: 2;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .auth-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .auth-footer a:hover {
+            color: var(--text-light);
+        }
+
+        .error-message {
+            background: rgba(239, 71, 111, 0.2);
+            color: #ff6b8b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Loading animation */
+        .auth-button.loading {
             pointer-events: none;
         }
 
-        .loading::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            border: 3px solid white;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: loading 0.6s linear infinite;
+        .auth-button.loading .button-text {
+            opacity: 0;
         }
 
-        @keyframes loading {
+        .auth-button.loading::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 50%;
+            left: 50%;
+            margin: -12px 0 0 -12px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s ease infinite;
+            z-index: 1;
+        }
+
+        @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-
-        .success {
-            background: var(--success-color) !important;
-        }
- 
-      
-        input:invalid {
-            border-color: var(--error-color);
+        /* Success animation */
+        .auth-button.success {
+            background: var(--success-color);
         }
 
-        input:valid {
-            border-color: var(--success-color);
+        .auth-button.success .button-text {
+            opacity: 1;
         }
-        .fas{
-            margin-top: 15px;
+
+        .auth-button.success::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Float label animation */
+        .form-floating {
+            position: relative;
+        }
+
+        .form-floating label {
+            position: absolute;
+            left: 45px;
+            top: 15px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: 0.2s ease all;
+        }
+
+        .form-floating input:focus ~ label,
+        .form-floating input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            color: var(--accent-color);
+            background: rgba(12, 26, 68, 0.8);
+            padding: 0 8px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <!-- Login Form -->
-    <div class="login-container">
-        <h2>Welcome Back</h2>
-        <form id="loginForm" novalidate>
-            <div class="input-group">
-                <label for="emailOrUsername">Email or Username</label>
-                <input 
-                    type="text" 
-                    id="emailOrUsername" 
-                    name="emailOrUsername" 
-                    required
-                    autocomplete="username"
-                >
-                <i class="fas fa-user"></i>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>Welcome Back</h2>
+                <p>Please enter your credentials to continue</p>
             </div>
-
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required
-                    autocomplete="current-password"
-                >
-                <i class="fas fa-eye toggle-password"></i>
-            </div>
-
+            
             <div class="error-message" id="errorMessage"></div>
+            
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="emailOrUsername">Email or Username</label>
+                    <div class="input-icon-wrap">
+                        <i class="input-icon fas fa-user"></i>
+                        <input 
+                            type="text" 
+                            id="emailOrUsername" 
+                            name="emailOrUsername" 
+                            class="auth-input" 
+                            required
+                            autocomplete="username"
+                            placeholder="Enter your email or username"
+                        >
+                    </div>
+                </div>
 
-            <button type="submit" id="performlogin">
-                <span>Login</span>
-            </button>
-        </form>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-icon-wrap">
+                        <i class="input-icon fas fa-lock"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="auth-input"
+                            required
+                            autocomplete="current-password"
+                            placeholder="Enter your password"
+                        >
+                        <i class="password-toggle fas fa-eye"></i>
+                    </div>
+                </div>
 
-        <p>
-            <a href="forgot.html">Forgot Password?</a> • 
-            <a href="signup.html">Create Account</a>
-        </p>
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        Remember me
+                    </label>
+                    <a href="forgot.html" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="loginButton" class="auth-button">
+                    <span class="button-text">Login</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="signup.html">Create Account</a></p>
+            </div>
+        </div>
     </div>
-    <script src="./scripts/loginScript.js">
-       
-    </script>
+
+    <script src="./scripts/loginScript.js"></script>
 </body>
 </html>
