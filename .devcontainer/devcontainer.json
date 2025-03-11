@@ -1,0 +1,21 @@
+{
+  "name": "Mr. Mobile Node.js",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:16",
+  "features": {
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0",
+      "password": "mr_mobile_pass"
+    }
+  },
+  "forwardPorts": [4000, 3306],
+  "postCreateCommand": "bash .devcontainer/setup-db.sh && npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "cweijan.vscode-mysql-client2"
+      ]
+    }
+  }
+}
